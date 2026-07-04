@@ -196,7 +196,7 @@ curl -X PUT http://localhost:8080/api/users/1/reset-password \
 
 ## 👨‍💻 Developer
 
-**M Fasri** — IT24102049
+**F R M Fasri** — IT24102049
 BSc (Hons) Information Technology, Specialization in Cybersecurity
 Sri Lanka Institute of Information Technology (SLIIT)
 
