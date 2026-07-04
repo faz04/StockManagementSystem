@@ -200,5 +200,5 @@ curl -X PUT http://localhost:8080/api/users/1/reset-password \
 BSc (Hons) Information Technology, Specialization in Cybersecurity
 Sri Lanka Institute of Information Technology (SLIIT)
 
-[![LinkedIn]()
-[![GitHub]()
+[![LinkedIn](www.linkedin.com/in/m-fasri)
+[![GitHub](https://github.com/faz04)
