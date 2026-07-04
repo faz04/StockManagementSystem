@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Stock Management System</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="login-container">
+    <div class="login-background">
+        <div class="login-overlay"></div>
+    </div>
+
+    <div class="login-content">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <h1>Stock Management System</h1>
+                <p>Please sign in to continue</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="username" name="username" required
+                               placeholder="Username" autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-container">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" name="password" required
+                               placeholder="Password" autocomplete="current-password">
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Remember me</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Sign In</span>
+                </button>
+            </form>
+
+            <!-- Role Information -->
+            <div class="role-info">
+                <h3>Access Levels</h3>
+                <div class="role-cards">
+                    <div class="role-card admin">
+                        <div class="role-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="role-details">
+                            <h4>Administrator</h4>
+                            <p>Full system access and user management</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card manager">
+                        <div class="role-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="role-details">
+                            <h4>Manager</h4>
+                            <p>Stock, Sales, HR, and Marketing management</p>
+                        </div>
+                    </div>
+
+                    <div class="role-card staff">
+                        <div class="role-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="role-details">
+                            <h4>Staff</h4>
+                            <p>Departmental access and operations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Credentials -->
+            <div class="demo-credentials">
+                <h4>Demo Credentials</h4>
+                <div class="demo-accounts">
+                    <div class="demo-account" onclick="fillCredentials('admin', 'Admin@123')">
+                        <strong>Admin:</strong> admin / Admin@123
+                    </div>
+                    <div class="demo-account" onclick="fillCredentials('stockmanager', 'Stock@123')">
+                        <strong>Stock Manager:</strong> stockmanager / Stock@123
+                    </div>
+                    <div class="demo-account" onclick="fillCredentials('salesstaff', 'Sales@123')">
+                        <strong>Sales Staff:</strong> salesstaff / Sales@123
+                    </div>
+                    <div class="demo-account" onclick="fillCredentials('hrstaff', 'HR@123')">
+                        <strong>HR Staff:</strong> hrstaff / HR@123
+                    </div>
+                    <div class="demo-account" onclick="fillCredentials('marketing', 'Marketing@123')">
+                        <strong>Marketing:</strong> marketing / Marketing@123
+                    </div>
+                </div>
+                <small>Click on credentials to auto-fill the form</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Authenticating...</p>
+    </div>
+</div>
+
+<script src="js/login.js"></script>
+</body>
+</html>

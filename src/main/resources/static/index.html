@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-warehouse"></i> Stock Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="pages/user-management.html"><i class="fas fa-users"></i> User Management</a></li>
+                <li><a href="#suppliers"><i class="fas fa-truck"></i> Supplier Management</a></li>
+                <li><a href="#staff"><i class="fas fa-user-tie"></i> Staff Management</a></li>
+                <li><a href="#inventory"><i class="fas fa-boxes"></i> Inventory Management</a></li>
+                <li><a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="dashboard">
+            <h2>Dashboard Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card users">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Total Users</h3>
+                        <p id="userCount">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="stat-card inventory">
+                    <div class="stat-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Active Stock Items</h3>
+                        <p id="stockCount">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card suppliers">
+                    <div class="stat-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Suppliers</h3>
+                        <p id="supplierCount">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card revenue">
+                    <div class="stat-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Monthly Revenue</h3>
+                        <p id="revenueCount">$0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <a href="pages/user-management.html" class="action-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add User</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Product</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-truck-loading"></i>
+                        <span>New Purchase</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-receipt"></i>
+                        <span>Generate Report</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading...</p>
+    </div>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

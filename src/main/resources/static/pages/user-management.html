@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - Stock Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/user-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-users"></i> User Management</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#" class="active"><i class="fas fa-users"></i> User Management</a></li>
+                <li><a href="#suppliers"><i class="fas fa-truck"></i> Suppliers</a></li>
+                <li><a href="#staff"><i class="fas fa-user-tie"></i> Staff</a></li>
+                <li><a href="#inventory"><i class="fas fa-boxes"></i> Inventory</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- User Statistics -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <p id="totalUsers">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Active Users</h3>
+                <p id="activeUsers">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Admins</h3>
+                <p id="adminUsers">0</p>
+            </div>
+            <div class="stat-card">
+                <h3>Staff Members</h3>
+                <p id="staffUsers">0</p>
+            </div>
+        </div>
+
+        <!-- Create User Form -->
+        <div class="form-section">
+            <h2><i class="fas fa-user-plus"></i> Create New User</h2>
+            <form id="createUserForm" class="user-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" id="username" name="username" required
+                               placeholder="Enter username" maxlength="50">
+                        <small class="form-help">Username must be 3-50 characters, letters, numbers, and underscores only</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role <span class="required">*</span></label>
+                        <select id="role" name="role" required>
+                            <option value="">Select Role</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="STOCK_MANAGER">Stock Manager</option>
+                            <option value="SALES_STAFF">Sales Staff</option>
+                            <option value="HR_STAFF">HR Staff</option>
+                            <option value="MARKETING_MANAGER">Marketing Manager</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required
+                               placeholder="Enter password" minlength="8">
+                        <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="form-help">Password must be at least 8 characters with uppercase, lowercase, number, and special character</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create User
+                </button>
+            </form>
+        </div>
+
+        <!-- Users List -->
+        <div class="users-section">
+            <div class="section-header">
+                <h2><i class="fas fa-list"></i> Users List</h2>
+                <div class="controls">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search users..."
+                               onkeyup="filterUsers()">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <select id="roleFilter" onchange="filterUsers()">
+                        <option value="">All Roles</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="STOCK_MANAGER">Stock Manager</option>
+                        <option value="SALES_STAFF">Sales Staff</option>
+                        <option value="HR_STAFF">HR Staff</option>
+                        <option value="MARKETING_MANAGER">Marketing Manager</option>
+                    </select>
+                    <select id="statusFilter" onchange="filterUsers()">
+                        <option value="">All Status</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="usersTable" class="users-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Created Date</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                    <!-- Users will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Modal for Edit User -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> Edit User</h3>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <form id="editUserForm">
+            <input type="hidden" id="editUserId">
+
+            <div class="form-group">
+                <label for="editUsername">Username</label>
+                <input type="text" id="editUsername" name="username" maxlength="50">
+            </div>
+
+            <div class="form-group">
+                <label for="editRole">Role</label>
+                <select id="editRole" name="role">
+                    <option value="ADMIN">Admin</option>
+                    <option value="STOCK_MANAGER">Stock Manager</option>
+                    <option value="SALES_STAFF">Sales Staff</option>
+                    <option value="HR_STAFF">HR Staff</option>
+                    <option value="MARKETING_MANAGER">Marketing Manager</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="editActive" name="active">
+                    Active User
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Update User</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for Reset Password -->
+<div id="passwordModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-key"></i> Reset Password</h3>
+            <span class="close" onclick="closePasswordModal()">&times;</span>
+        </div>
+        <form id="resetPasswordForm">
+            <input type="hidden" id="resetUserId">
+
+            <div class="form-group">
+                <label for="newPassword">New Password <span class="required">*</span></label>
+                <div class="password-input">
+                    <input type="password" id="newPassword" name="newPassword" required minlength="8">
+                    <button type="button" class="password-toggle" onclick="togglePassword('newPassword')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <small class="form-help">Password must be at least 8 characters with uppercase, lowercase, number, and special character</small>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closePasswordModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay" style="display: none;">
+    <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Loading...</p>
+    </div>
+</div>
+
+<script src="../js/utils.js"></script>
+<script src="../js/user-management.js"></script>
+</body>
+</html>
